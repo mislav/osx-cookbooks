@@ -4,6 +4,10 @@ include_recipe "gcc"
 package "rbenv"
 package "ruby-build"
 
+if global = node[:rbenv][:global]
+  node[:rbenv][:versions] << global if !node[:rbenv][:versions].include?(global)
+end
+
 node[:rbenv][:versions].each do |version|
   rbenv_version version
 end
