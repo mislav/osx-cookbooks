@@ -12,6 +12,12 @@ directory node[:homebrew][:prefix] do
   group "staff"
 end
 
+directory "#{node[:homebrew][:prefix]}/bin" do
+  action :create
+  owner node[:homebrew][:user]
+  group "staff"
+end
+
 homebrew_tar = "#{Chef::Config[:file_cache_path]}/mxcl-homebrew.tar.gz"
 
 unless File.exist?("#{node[:homebrew][:prefix]}/bin/brew")
