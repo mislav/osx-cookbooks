@@ -22,3 +22,8 @@ if version = node[:rbenv][:global]
     end
   end
 end
+
+execute "rbenv rehash" do
+  user node[:rbenv][:user]
+  action :nothing
+end
