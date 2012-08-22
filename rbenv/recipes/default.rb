@@ -9,8 +9,12 @@ node[:rbenv][:versions].each do |version|
 end
 
 if version = node[:rbenv][:global]
+  target = "#{node[:rbenv][:root]}/version"
   execute "rbenv global #{version}" do
+    command "echo #{version} > #{target}"
     user node[:rbenv][:user]
-    not_if { File.exist?("#{node[:rbenv][:root]}/version") }
+    not_if do
+      File.exist?(target) && File.read(target).chomp == version
+    end
   end
 end
