@@ -1,3 +1,9 @@
+git node[:dotfiles][:path] do
+  repository node[:dotfiles][:git]
+  action :sync
+  user node[:dotfiles][:user]
+end
+
 Dir["#{node[:dotfiles][:path]}/*"].each do |file|
   source, file = file, File.basename(file)
   target = "#{node[:dotfiles][:home]}/.#{file}"
@@ -23,9 +29,9 @@ Dir["#{node[:dotfiles][:path]}/*"].each do |file|
   end
 end
 
+include_recipe "homebrew"
 include_recipe "emacs"
 include_recipe "git"
-include_recipe "homebrew"
 include_recipe "rbenv"
 
 package "ack"
