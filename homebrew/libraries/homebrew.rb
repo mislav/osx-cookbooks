@@ -42,6 +42,7 @@ class Chef::Provider::Package::Homebrew < ::Chef::Provider::Package
   end
 
   def homebrew_candiate_version
+    brew_update
     name = @new_resource.package_name
     status, stdout, stderr = output_of_brew_command("info #{name} | head -n1")
     # sample output: "<name>: stable <version>, HEAD"
@@ -70,6 +71,12 @@ class Chef::Provider::Package::Homebrew < ::Chef::Provider::Package
 
   def purge_package(name, version)
     run_brew_command "uninstall #{name}"
+  end
+
+  def brew_update
+    return if defined? @@brew_update_ran
+    run_brew_command "update"
+    @@brew_update_ran = true
   end
 
   def run_brew_command(command)

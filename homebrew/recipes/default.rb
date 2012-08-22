@@ -32,11 +32,6 @@ unless File.exist?("#{node[:homebrew][:prefix]}/bin/brew")
   end
 end
 
-execute "brew update" do
-  command "#{node[:homebrew][:prefix]}/bin/brew update"
-  user node[:homebrew][:user]
-end
-
 execute "brew cleanup" do
   command "#{node[:homebrew][:prefix]}/bin/brew cleanup"
   user node[:homebrew][:user]
