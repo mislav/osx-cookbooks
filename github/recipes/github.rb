@@ -13,6 +13,7 @@ include_recipe "rbenv"
 include_recipe "redis"
 include_recipe "solr"
 
+package "elasticsearch"
 package "gpgme"
 
 rbenv_version "1.8.7-p358"
