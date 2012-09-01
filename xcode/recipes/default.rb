@@ -3,9 +3,9 @@ execute "ensure Xcode is installed" do
   creates "/Applications/Xcode.app"
 end
 
-execute "ensure Xcode Command Line Tools are installed" do
-  command "sh -c 'exit 1'"
-  creates "/usr/bin/xcrun"
+execute "ensure Xcode license is accepted" do
+  command "xcrun -find git"
+  not_if "xcrun -find git"
 end
 
 execute "sudo xcode-select -switch #{node[:xcode][:path]}" do
