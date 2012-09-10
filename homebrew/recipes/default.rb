@@ -6,12 +6,6 @@ execute node[:homebrew][:prefix] do
   creates node[:homebrew][:prefix]
 end
 
-directory node[:homebrew][:prefix] do
-  action :create
-  owner node[:homebrew][:user]
-  group "staff"
-end
-
 directory "#{node[:homebrew][:prefix]}/bin" do
   action :create
   owner node[:homebrew][:user]
