@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+        <key>KeepAlive</key>
+        <true/>
+        <key>Label</key>
+        <string>org.elasticsearch</string>
+        <key>ProgramArguments</key>
+        <array>
+                <string><%= @prefix %>/bin/elasticsearch</string>
+                <string>-f</string>
+                <string>-D es.config=<%= @prefix %>/opt/elasticsearch/config/elasticsearch.yml</string>
+        </array>
+        <key>EnvironmentVariables</key>
+        <dict>
+          <key>ES_JAVA_OPTS</key>
+          <string>-Xss200000</string>
+        </dict>
+        <key>RunAtLoad</key>
+        <true/>
+        <key>UserName</key>
+        <string><%= @user %></string>
+        <key>WorkingDirectory</key>
+        <string><%= @prefix %>/var</string>
+        <key>StandardErrorPath</key>
+        <string>/dev/null</string>
+        <key>StandardOutPath</key>
+        <string>/dev/null</string>
+</dict>
+</plist>
