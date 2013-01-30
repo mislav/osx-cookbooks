@@ -13,6 +13,25 @@ execute "ensure Xcode license is accepted" do
   not_if "xcrun -find git"
 end
 
+unless File.exist?("/usr/bin/llvm-gcc")
+  cli_dmg = "command_line_tools_os_s_x_mountain_lion_for_xcode_january_2013.dmg"
+  root    = Chef::Config[:file_cache_path]
+
+  remote_file "#{root}/#{cli_dmg}" do
+    source "http://devimages.apple.com/downloads/xcode/#{cli_dmg}"
+    action :create_if_missing
+  end
+
+  archive "#{root}/#{cli_dmg}" do
+    path root
+  end
+
+  execute "sudo installer -pkg '#{root}/Command Line Tools (Mountain Lion).mpkg' -target /" do
+    user node[:homebrew][:user]
+    not_if "which llvm-gcc"
+  end
+end
+
 execute "ensure Xcode Command Line Tools are installed" do
   command "which llvm-gcc"
   not_if "which llvm-gcc"
