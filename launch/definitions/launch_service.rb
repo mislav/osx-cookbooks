@@ -8,9 +8,13 @@ define :launch_service do
 
   dirname = File.dirname(params[:path])
   unless Chef::Provider::Service::Launch.path_owned_by_root?(dirname)
-    directory dirname do
-      owner node[:launch][:user]
-      group "staff"
+    # Only define once
+    begin
+    rescue Chef::Exceptions::ResourceNotFound
+      directory dirname do
+        owner node[:launch][:user]
+        group "staff"
+      end
     end
   end
 
