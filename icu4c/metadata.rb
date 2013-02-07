@@ -4,4 +4,6 @@ license          "MIT"
 description      "Installs/configures ICU4C"
 version          "0.1.0"
 
+depends "homebrew"
+
 supports "mac_os_x"

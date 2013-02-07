@@ -4,4 +4,7 @@ license          "MIT"
 description      "Installs/configures MySQL"
 version          "0.1.0"
 
+depends "homebrew"
+depends "launch"
+
 supports "mac_os_x"
