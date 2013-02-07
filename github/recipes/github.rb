@@ -16,4 +16,8 @@ include_recipe "solr"
 
 package "gpgme"
 
-rbenv_version "1.8.7-p358"
+begin
+  run_context.resource_collection.lookup("rbenv_version[rbenv version 1.8.7-p358]")
+rescue Chef::Exceptions::ResourceNotFound => e
+  rbenv_version "1.8.7-p358"
+end
