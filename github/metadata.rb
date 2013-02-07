@@ -4,6 +4,7 @@ license          "MIT"
 description      "Installs/configures GitHub"
 version          "0.1.0"
 
+depends "application"
 depends "elasticsearch"
 depends "erlang"
 depends "gcc"
