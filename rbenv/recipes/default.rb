@@ -5,7 +5,9 @@ package "rbenv"
 package "ruby-build"
 
 if global = node[:rbenv][:global]
-  node[:rbenv][:versions] << global if !node[:rbenv][:versions].include?(global)
+  if !node[:rbenv][:versions].include?(global)
+    rbenv_version global
+  end
 end
 
 node[:rbenv][:versions].each do |version|
