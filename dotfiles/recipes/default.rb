@@ -34,7 +34,6 @@ include_recipe "emacs"
 include_recipe "git"
 include_recipe "rbenv"
 
-package "ack"
 package "direnv"
 package "rlwrap"
 package "wget"
